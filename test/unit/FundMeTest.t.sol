@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 import {Test, console} from "forge-std/Test.sol";
-import {FundMe} from "../src/FundMe.sol";
-import {DeployFundMe} from "../script/DeployFundMe.s.sol";
+import {FundMe} from "../../src/FundMe.sol";
+import {DeployFundMe} from "../../script/DeployFundMe.s.sol";
 
 contract FundMeTest is Test {
     FundMe fundMe;
@@ -66,13 +66,10 @@ contract FundMeTest is Test {
         console.log(startingFundMeBalance, startingOwnerBalance);
 
         //act
-        uint256 gasStart = gasleft();
 
         vm.txGasPrice(GAS_PRICE);
         vm.prank(fundMe.getOwner());
         fundMe.withdraw();
-
-        uint256 gasEnd = gasleft();
 
         //assert
         uint256 endingOwnerBalance = fundMe.getOwner().balance;
